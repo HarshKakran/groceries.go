@@ -25,3 +25,5 @@ type Item struct {
 
 // TODO: Will be useful when using JWT or any other type of authentication
 // var UserStoreMapping = make(map[User]Store)
+var Stores []Store
+var Users []User

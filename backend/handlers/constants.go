@@ -9,3 +9,5 @@ var STORE_TYPE_KIRYANA = "kiryana"
 var ITEM_TYPE_FRUITS = "fruits"
 var ITEM_TYPE_VEGETABLE = "vegetable"
 var ITEM_TYPE_GROCERIES = "groceries"
+
+var HEADER_USER_ID = "userID"
