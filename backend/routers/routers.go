@@ -2,24 +2,26 @@ package routers
 
 import (
 	"github.com/HarshKakran/groceries.go/handlers"
-	"github.com/gorilla/mux"
+	"github.com/gin-gonic/gin"
 )
 
-func Router() *mux.Router {
-	router := mux.NewRouter()
+func Router() *gin.Engine {
+	router := gin.Default()
 
-	// common routes
-	router.HandleFunc("/api/signin", handlers.Signin).Methods("POST")
-	router.HandleFunc("/api/signup", handlers.Signup).Methods("POST")
-	router.HandleFunc("/api/signout", handlers.Signout).Methods("GET")
+	// Common routes
+	router.POST("/api/signin", handlers.Signin)
+	router.POST("/api/signup", handlers.Signup)
+	router.GET("/api/signout", handlers.Signout)
 
-	// owner routes
-	router.HandleFunc("/api/store/", handlers.StoreInfo).Methods("GET")
-	router.HandleFunc("/api/store/item", handlers.CreateItem).Methods("POST")
-	router.HandleFunc("api/store/item/{id}", handlers.UpdateItem).Methods("PUT")
-	router.HandleFunc("api/store/item/{id}", handlers.DeleteItem).Methods("DELETE")
+	// Owner routes
+	router.GET("/api/store", handlers.StoreInfo)
+	router.POST("/api/store/item", handlers.CreateItem)
+	router.PUT("/api/store/item/:id", handlers.UpdateItem)
+	router.DELETE("/api/store/item/:id", handlers.DeleteItem)
 
-	// consumer routes
-	router.HandleFunc("api/consumer", handlers.ConsumerPage).Methods("GET")
-	router.HandleFunc("api/consumer/checkout", handlers.CreateOrder).Methods("POST")
+	// Consumer routes
+	router.GET("/api/consumer", handlers.ConsumerPage)
+	router.POST("/api/consumer/checkout", handlers.CreateOrder)
+
+	return router
 }
