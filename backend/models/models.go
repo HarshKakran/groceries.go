@@ -6,11 +6,12 @@ type User struct {
 	Role     string `json:"role"`
 	Username string `json:"username"`
 	Password string `json:"password"`
+	Store    *Store `json:"store"`
 }
 
 type Store struct {
 	// ID    int    `json:"id"`
-	Owner User   `json:"owner"`
+	// Owner User   `json:"owner"`
 	Type  string `json:"type"`
 	Items []Item `json:"items"`
 }
@@ -25,5 +26,4 @@ type Item struct {
 
 // TODO: Will be useful when using JWT or any other type of authentication
 // var UserStoreMapping = make(map[User]Store)
-var Stores []Store
 var Users []User
