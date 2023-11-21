@@ -2,7 +2,10 @@ package main
 
 import (
 	"fmt"
+	"log"
 
+	"github.com/HarshKakran/groceries.go/handlers"
+	"github.com/HarshKakran/groceries.go/models"
 	"github.com/HarshKakran/groceries.go/routers"
 )
 
@@ -18,8 +21,7 @@ func main() {
 		}
 	}()
 
-	fmt.Printf("Server is now running on port %s\n", port)
-	fmt.Println("Starting GO API service...")
+	fmt.Printf("Starting GO API service on port %s\n", port)
 	fmt.Println(`
  ______     ______        ______     ______   __    
 /\  ___\   /\  __ \      /\  __ \   /\  == \ /\ \   
@@ -28,5 +30,18 @@ func main() {
   \/_____/   \/_____/      \/_/\/_/   \/_/     \/_/ `)
 
 	// This is to keep the main goroutine from exiting immediately
+
+	err := models.Load(handlers.USERS_DATA_FILE, &models.Users)
+	if err != nil {
+		log.Fatalf("error while loading users data. %v", err)
+	}
+
+	err = models.Load(handlers.ORDERS_DATA_FILE, &models.ConsumerOrdersMapping)
+	if err != nil {
+		log.Fatalf("error while loading orders data. %v", err)
+	}
+	fmt.Println("data loaded")
+	// fmt.Println(models.Users, "\n", models.ConsumerOrdersMapping)
+
 	select {}
 }
